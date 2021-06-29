@@ -10,20 +10,23 @@ import { MoviesService } from '../services/movies.service';
 export class Tab1Page implements OnInit {
 
   movies: Movie[] = [];
-
-  slideOpts = {
-    slidesPerView: 1.1,
-    freeMode: true
-  }
-
+  popularMovies: Movie[] = [];
+  
   constructor(private moviesService: MoviesService) {}
   
   ngOnInit(): void {
+
+    this.moviesService.getPopulares().subscribe(
+      (resp: MDBResponse) => {
+        console.log(resp);
+        this.popularMovies = resp.results;
+      }
+    )
+
     this.moviesService.getFeature().subscribe(
       (resp: MDBResponse) => {
         console.log(resp);
         this.movies = resp.results;
-        console.log(this.movies);
       } 
     )
   }

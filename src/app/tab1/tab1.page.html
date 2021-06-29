@@ -1,9 +1,33 @@
 <ion-content [fullscreen]="true">
-  <ion-slides [options]="slideOpts">
-    <ion-slide *ngFor="let movie of movies">
-      <ion-card>
-        <img [src]="movie.backdrop_path | imagen" alt="">
-      </ion-card>
-    </ion-slide>
-  </ion-slides>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h3>Películas nuevas</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <app-slideshow-backdrop [movies]="movies"></app-slideshow-backdrop>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h3>Cartelera</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <app-slideshowposter [movies]="movies"></app-slideshowposter>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h3>Populares</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <app-slideshowposter [movies]="popularMovies"></app-slideshowposter>
+
 </ion-content>

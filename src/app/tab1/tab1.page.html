@@ -20,6 +20,16 @@
 
   <app-slideshowposter [movies]="movies"></app-slideshowposter>
 
+  <!-- <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h3>Populares</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <app-slideshowposter [movies]="popularMovies"></app-slideshowposter> -->
+
   <ion-grid>
     <ion-row>
       <ion-col>
@@ -28,6 +38,6 @@
     </ion-row>
   </ion-grid>
 
-  <app-slideshowposter [movies]="popularMovies"></app-slideshowposter>
+  <app-slidesshow-pares [movies]="popularMovies" (cargarMas)="cargarMas()"></app-slidesshow-pares>
 
 </ion-content>

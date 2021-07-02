@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MDBResponse } from '../interfaces/interfaces';
+import { Genre, MDBResponse, PeliculaDetalle, RespuestaCredits } from '../interfaces/interfaces';
 import { environment } from '../../environments/environment';
 
 const URL = environment.url;
@@ -12,6 +12,8 @@ const apiKey = environment.apiKey;
 export class MoviesService {
 
   private popularPage = 499;
+
+  public genres: Genre[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -38,5 +40,23 @@ export class MoviesService {
     const final = `${hoy.getFullYear()}-${mesString}-${ultimoDia}`;
 
     return this.executeQuery<MDBResponse>(`/discover/movie?&primary_release_date.gte=${inicio}&primary_release_date.lte=${final}`);
+  }
+
+  getMovieDetail(id: string) {
+    return this.executeQuery<PeliculaDetalle>(`/movie/${id}?a=1`);
+  }
+
+  getActorMovies(id: string) {
+    return this.executeQuery<RespuestaCredits>(`/movie/${id}/credits?a=1`);
+  }  
+
+  loadGenres(): Promise<Genre[]> {
+    return new Promise(resolve => {
+      this.executeQuery(`/genre/movie/list?a=1`).subscribe(resp => {
+        this.genres = resp['genres'];
+        console.log(this.genres);
+        resolve(this.genres);
+      });
+    })
   }
 }
